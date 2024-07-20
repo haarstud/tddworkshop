@@ -17,6 +17,7 @@ def test_X_wins_diagonal():
     b.make_move(what='O', where='b')
     b.make_move(what='X', where='e')
     b.make_move(what='O', where='d')
+    assert b.winner() is None
     b.make_move(what='X', where='i')
     assert b.winner() == 'X'
 
@@ -27,6 +28,7 @@ def test_O_wins_column():
     b.make_move(what='X', where='d')
     b.make_move(what='O', where='e')
     b.make_move(what='X', where='c')
+    assert b.winner() is None
     b.make_move(what='O', where='h')
     assert b.winner() == 'O'
 
@@ -37,6 +39,7 @@ def test_O_wins_row():
     b.make_move(what='X', where='b')
     b.make_move(what='O', where='e')
     b.make_move(what='X', where='g')
+    assert b.winner() is None
     b.make_move(what='O', where='f')
 
     assert b.winner() == 'O'
