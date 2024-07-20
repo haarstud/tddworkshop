@@ -1,0 +1,2 @@
+class NotYourTurn(Exception):
+    pass

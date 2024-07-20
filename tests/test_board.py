@@ -1,4 +1,6 @@
 from xogame import board
+import xogame.errors
+import pytest
 
 def test_no_winner_on_empty_board():
     b = board.Board()
@@ -43,3 +45,9 @@ def test_O_wins_row():
     b.make_move(what='O', where='f')
 
     assert b.winner() == 'O'
+
+def test_enforce_players_switching_turns():
+    b = board.Board()
+    b.make_move(what='X', where='a')
+    with pytest.raises(xogame.errors.NotYourTurn):
+        b.make_move(what='X', where='b')
