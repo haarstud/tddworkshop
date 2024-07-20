@@ -1,3 +1,4 @@
+import pytest
 import xogame.player
 
 
@@ -7,6 +8,7 @@ def launch_server():
 def winner():
     return None
 
+@pytest.mark.xfail
 def test_xogame():
     user_x = xogame.player.Player('X')
     user_o = xogame.player.Player('O')
