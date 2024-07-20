@@ -51,3 +51,9 @@ def test_enforce_players_switching_turns():
     b.make_move(what='X', where='a')
     with pytest.raises(xogame.errors.NotYourTurn):
         b.make_move(what='X', where='b')
+        
+def test_position_may_only_be_occupied_once():
+    b = board.Board()
+    b.make_move(what='X', where='a')
+    with pytest.raises(xogame.errors.PositionTaken, match='by X'):
+        b.make_move(what='O', where='a')
