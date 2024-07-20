@@ -1,0 +1,25 @@
+name: E2ETests
+
+on:
+  - pull_request
+
+jobs:
+  E2ETests:
+    runs-on: ubuntu-24.04
+    steps:
+    - name: CheckoutRepository
+      uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+    - name: InstallPoetry
+      uses: abatilo/actions-poetry@v2
+    - name: InstallProject
+      run: |
+        poetry install
+    - name: Test
+      run: |
+          #!/bin/bash
+          set -e
+          poetry run python -m pytest -rA -sv tests/test_e2e_xogame.py
