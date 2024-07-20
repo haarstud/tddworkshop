@@ -6,3 +6,6 @@ class PositionTaken(Exception):
 
 class InvalidPosition(Exception):
     pass
+
+class InvalidSymbol(Exception):
+    pass

@@ -62,3 +62,8 @@ def test_position_must_be_valid():
     b = board.Board()
     with pytest.raises(xogame.errors.InvalidPosition):
         b.make_move(what='X', where='j')
+
+def test_symbol_must_be_X_or_O():
+    b = board.Board()
+    with pytest.raises(xogame.errors.InvalidSymbol):
+        b.make_move(what='Z', where='a')
