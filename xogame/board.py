@@ -1,6 +1,9 @@
+from . import errors
+
 class Board:
     def __init__(self):
         self._board = {position: None for position in 'abcdefghi'}
+        self._last_player = None
 
     def winner(self):
         for symbol in 'XO':
@@ -24,4 +27,7 @@ class Board:
         return False
 
     def make_move(self, what, where):
+        if self._last_player == what:
+            raise errors.NotYourTurn
+        self._last_player = what
         self._board[where] = what
