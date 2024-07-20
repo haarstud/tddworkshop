@@ -13,20 +13,22 @@ class Board:
         return None
 
     def _won(self, symbol):
-        for row in 'abc', 'def', 'ghi':
-            if all(self._board[position] == symbol for position in row):
-                return True
-        for column in 'adg', 'beh', 'cfi':
-            if all(self._board[position] == symbol for position in column):
-                return True
-
+        COLUMNS = ['adg', 'beh', 'cfi']
+        ROWS = ['abc', 'def', 'ghi']
         DIAGONAL = 'aei'
-        if all(self._board[position] == symbol for position in DIAGONAL):
-            return True
+        WINNING_COMBINATIONS = ROWS + COLUMNS + [DIAGONAL]
+        for combination in WINNING_COMBINATIONS:
+            if all(self._board[position] == symbol for position in combination):
+                return True
 
         return False
 
     def make_move(self, what, where):
+        self._enforce_valid_move(what, where)
+        self._last_player = what
+        self._board[where] = what
+
+    def _enforce_valid_move(self, what, where):
         if what not in 'XO':
             raise errors.InvalidSymbol(f'what must be X or O, not {what}')
         if where not in self._board.keys():
@@ -37,6 +39,3 @@ class Board:
 
         if self._last_player == what:
             raise errors.NotYourTurn
-
-        self._last_player = what
-        self._board[where] = what
