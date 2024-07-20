@@ -27,9 +27,14 @@ class Board:
         return False
 
     def make_move(self, what, where):
+        if where not in self._board.keys():
+            raise errors.InvalidPosition(f'position {where} is not valid')
+
         if self._board[where] is not None:
             raise errors.PositionTaken(f'position {where} is already taken by {self._board[where]}')
+
         if self._last_player == what:
             raise errors.NotYourTurn
+
         self._last_player = what
         self._board[where] = what

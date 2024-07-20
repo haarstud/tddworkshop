@@ -57,3 +57,8 @@ def test_position_may_only_be_occupied_once():
     b.make_move(what='X', where='a')
     with pytest.raises(xogame.errors.PositionTaken, match='by X'):
         b.make_move(what='O', where='a')
+
+def test_position_must_be_valid():
+    b = board.Board()
+    with pytest.raises(xogame.errors.InvalidPosition):
+        b.make_move(what='X', where='j')
