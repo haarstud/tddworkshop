@@ -27,6 +27,8 @@ class Board:
         return False
 
     def make_move(self, what, where):
+        if what not in 'XO':
+            raise errors.InvalidSymbol(f'what must be X or O, not {what}')
         if where not in self._board.keys():
             raise errors.InvalidPosition(f'position {where} is not valid')
 
